@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Angular proxy generator</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/result.css" />
+  </head>
+  <body>
+    <div class="header-app">
+      <h1>
+        A frontend for
+        <a
+          href="https://gist.github.com/parollon/db55d7aec70e124cbd06e8bf5f65ddac"
+        >
+          Angular proxy generator</a
+        >
+      </h1>
+      <p>
+        More information about Angular proxy
+        <a
+          href="https://angular.dev/tools/cli/serve#proxying-to-a-backend-server"
+        >
+          here</a
+        >
+      </p>
+    </div>
+    <div id="myDIV" class="header">
+      <input type="text" id="myInput" placeholder="Url..." />
+      <span onclick="newElement()" class="addBtn" id="addurl">Add</span>
+      <span onclick="openReultFile()" class="addBtn" id="gen"
+        >Generate proxy file</span
+      >
+    </div>
+
+    <ul id="myUL"></ul>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/result.js"></script>
+  </body>
+</html>
