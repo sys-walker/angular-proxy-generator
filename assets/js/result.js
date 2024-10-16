@@ -20,21 +20,30 @@ function getUrls() {
 
 function generateProxyConfig(urls) {
   const proxyConfig = {};
+  const domainPrefixMap = {};
   urls.forEach((url) => {
-    const match = url.match(/^(https?:\/\/[^/]+)(\/[^/]+)(\/.*)$/);
-    if (match) {
-      const [, target, prefix, path] = match;
-      const key = `${prefix}/*`;
-      proxyConfig[key] = {
-        target,
-        secure: true,
-        changeOrigin: true,
-        logLevel: "debug",
-        pathRewrite: {
-          [`^${prefix}`]: prefix,
-        },
-      };
-    }
+      const match = url.match(/^(https?:\/\/[^/]+)(\/[^/]+)(\/.*)$/);
+      if (match) {
+          const [, target, prefix] = match;
+          if (!domainPrefixMap[prefix]) {
+              domainPrefixMap[prefix] = [target];
+          }
+          else if (!domainPrefixMap[prefix].includes(target)) {
+              domainPrefixMap[prefix].push(target);
+          }
+          const targetCount = domainPrefixMap[prefix].indexOf(target);
+          const key = targetCount === 0 ? `${prefix}/*` : `${prefix}${targetCount}/*`;
+          const pRw = targetCount === 0 ? `${prefix}` : `${prefix}${targetCount}`;
+          proxyConfig[key] = {
+              target,
+              secure: true,
+              changeOrigin: true,
+              logLevel: 'debug',
+              pathRewrite: {
+                  [`^${pRw}`]: prefix,
+              },
+          };
+      }
   });
   return proxyConfig;
 }
